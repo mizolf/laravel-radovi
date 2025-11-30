@@ -2,10 +2,10 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ __('Task Details') }}
+                {{ __('tasks.task_details') }}
             </h2>
             <a href="{{ route('tasks.index') }}" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                Back to Tasks
+                {{ __('tasks.back_to_tasks') }}
             </a>
         </div>
     </x-slot>
@@ -31,7 +31,7 @@
 
                     <!-- Description -->
                     <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-gray-900 mb-3">Task Description</h3>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">{{ __('tasks.task_description') }}</h3>
                         <div class="prose max-w-none">
                             <p class="text-gray-700 whitespace-pre-line">{{ $task->description }}</p>
                         </div>
@@ -41,16 +41,16 @@
                     <div class="mt-6 pt-6 border-t">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
                             <div>
-                                <span class="font-semibold">Created by:</span>
+                                <span class="font-semibold">{{ __('tasks.created_by') }}:</span>
                                 <span class="ml-2">{{ $task->user->name }}</span>
                             </div>
                             <div>
-                                <span class="font-semibold">Created on:</span>
+                                <span class="font-semibold">{{ __('tasks.created_on') }}:</span>
                                 <span class="ml-2">{{ $task->created_at->format('F d, Y') }}</span>
                             </div>
                             @if($task->created_at != $task->updated_at)
                                 <div>
-                                    <span class="font-semibold">Last updated:</span>
+                                    <span class="font-semibold">{{ __('tasks.last_updated') }}:</span>
                                     <span class="ml-2">{{ $task->updated_at->format('F d, Y') }}</span>
                                 </div>
                             @endif
@@ -61,13 +61,13 @@
                     @if(Auth::user()->isNastavnik() && $task->user_id === Auth::id())
                         <div class="mt-8 pt-6 border-t flex gap-3">
                             <a href="{{ route('tasks.edit', $task) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
-                                Edit Task
+                                {{ __('tasks.edit_task') }}
                             </a>
-                            <form method="POST" action="{{ route('tasks.destroy', $task) }}" class="inline" onsubmit="return confirm('Are you sure you want to delete this task?');">
+                            <form method="POST" action="{{ route('tasks.destroy', $task) }}" class="inline" onsubmit="return confirm('{{ __('tasks.confirm_delete') }}');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
-                                    Delete Task
+                                    {{ __('tasks.delete_task') }}
                                 </button>
                             </form>
                         </div>

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserManagementController;
@@ -32,5 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/tasks', [TaskController::class, 'index'])->name('tasks.index');
     Route::get('/tasks/{task}', [TaskController::class, 'show'])->name('tasks.show');
 });
+
+// Language switcher route
+Route::get('/language/{locale}', [LanguageController::class, 'switch'])->name('language.switch');
 
 require __DIR__.'/auth.php';
