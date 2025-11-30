@@ -37,4 +37,23 @@ return [
     'created_success' => 'Zadatak uspješno kreiran!',
     'updated_success' => 'Zadatak uspješno ažuriran!',
     'deleted_success' => 'Zadatak uspješno obrisan!',
+
+    // Applications
+    'apply_for_task' => 'Prijavi se na ovaj zadatak',
+    'withdraw_application' => 'Povuci prijavu',
+    'application_status' => 'Status prijave',
+    'view_applications' => 'Pregledaj prijave',
+    'applications_for' => 'Prijave za',
+    'back_to_task' => 'Natrag na zadatak',
+    'applications_list' => 'Popis prijava',
+    'no_applications' => 'Još nema prijava.',
+    'student_name' => 'Ime studenta',
+    'email' => 'Email',
+    'applied_at' => 'Prijavljeno',
+    'status' => 'Status',
+    'actions' => 'Akcije',
+    'accept' => 'Prihvati',
+    'reject' => 'Odbij',
+    'set_pending' => 'Postavi na čekanje',
+    'confirm_withdraw' => 'Jeste li sigurni da želite povući svoju prijavu?',
 ];

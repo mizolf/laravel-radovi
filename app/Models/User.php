@@ -79,4 +79,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(Task::class);
     }
+
+    /**
+     * Get all task applications submitted by this user (student)
+     */
+    public function taskApplications(): HasMany
+    {
+        return $this->hasMany(TaskApplication::class);
+    }
 }

@@ -37,4 +37,23 @@ return [
     'created_success' => 'Task created successfully!',
     'updated_success' => 'Task updated successfully!',
     'deleted_success' => 'Task deleted successfully!',
+
+    // Applications
+    'apply_for_task' => 'Apply for this Task',
+    'withdraw_application' => 'Withdraw Application',
+    'application_status' => 'Application Status',
+    'view_applications' => 'View Applications',
+    'applications_for' => 'Applications for',
+    'back_to_task' => 'Back to Task',
+    'applications_list' => 'List of Applications',
+    'no_applications' => 'No applications yet.',
+    'student_name' => 'Student Name',
+    'email' => 'Email',
+    'applied_at' => 'Applied At',
+    'status' => 'Status',
+    'actions' => 'Actions',
+    'accept' => 'Accept',
+    'reject' => 'Reject',
+    'set_pending' => 'Set Pending',
+    'confirm_withdraw' => 'Are you sure you want to withdraw your application?',
 ];

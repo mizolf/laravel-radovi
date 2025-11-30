@@ -53,6 +53,21 @@
                                             {{ __('tasks.created_by') }}: <span class="font-medium">{{ $task->user->name }}</span>
                                             <span class="mx-2">•</span>
                                             {{ $task->created_at->format('M d, Y') }}
+                                            @if(Auth::user()->isStudent())
+                                                @php
+                                                    $userApplication = $task->applications()->where('user_id', Auth::id())->first();
+                                                @endphp
+                                                @if($userApplication)
+                                                    <span class="mx-2">•</span>
+                                                    <span class="px-2 py-1 text-xs font-semibold rounded-full
+                                                        @if($userApplication->status === 'pending') bg-yellow-100 text-yellow-800
+                                                        @elseif($userApplication->status === 'accepted') bg-green-100 text-green-800
+                                                        @else bg-red-100 text-red-800
+                                                        @endif">
+                                                        {{ ucfirst($userApplication->status) }}
+                                                    </span>
+                                                @endif
+                                            @endif
                                         </div>
                                         <div class="flex gap-2">
                                             <a href="{{ route('tasks.show', $task) }}" class="text-blue-600 hover:text-blue-800 font-medium">

@@ -12,6 +12,18 @@
 
     <div class="py-12">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
+            @if (session('success'))
+                <div class="mb-4 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+                    <span class="block sm:inline">{{ session('success') }}</span>
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <span class="block sm:inline">{{ session('error') }}</span>
+                </div>
+            @endif
+
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-8 text-gray-900">
                     <!-- Header -->
@@ -63,6 +75,9 @@
                             <a href="{{ route('tasks.edit', $task) }}" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
                                 {{ __('tasks.edit_task') }}
                             </a>
+                            <a href="{{ route('tasks.applications', $task) }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                {{ __('tasks.view_applications') }} ({{ $task->applications()->count() }})
+                            </a>
                             <form method="POST" action="{{ route('tasks.destroy', $task) }}" class="inline" onsubmit="return confirm('{{ __('tasks.confirm_delete') }}');">
                                 @csrf
                                 @method('DELETE')
@@ -70,6 +85,46 @@
                                     {{ __('tasks.delete_task') }}
                                 </button>
                             </form>
+                        </div>
+                    @endif
+
+                    <!-- Student Application Section -->
+                    @if(Auth::user()->isStudent())
+                        @php
+                            $userApplication = $task->applications()->where('user_id', Auth::id())->first();
+                        @endphp
+
+                        <div class="mt-8 pt-6 border-t">
+                            @if($userApplication)
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-4">
+                                        <span class="text-lg font-semibold">{{ __('tasks.application_status') }}:</span>
+                                        <span class="px-4 py-2 rounded-full text-sm font-semibold
+                                            @if($userApplication->status === 'pending') bg-yellow-100 text-yellow-800
+                                            @elseif($userApplication->status === 'accepted') bg-green-100 text-green-800
+                                            @else bg-red-100 text-red-800
+                                            @endif">
+                                            {{ ucfirst($userApplication->status) }}
+                                        </span>
+                                    </div>
+                                    @if($userApplication->status === 'pending')
+                                        <form method="POST" action="{{ route('tasks.withdraw', $task) }}" class="inline" onsubmit="return confirm('{{ __('tasks.confirm_withdraw') }}');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                                {{ __('tasks.withdraw_application') }}
+                                            </button>
+                                        </form>
+                                    @endif
+                                </div>
+                            @else
+                                <form method="POST" action="{{ route('tasks.apply', $task) }}">
+                                    @csrf
+                                    <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-6 rounded text-lg">
+                                        {{ __('tasks.apply_for_task') }}
+                                    </button>
+                                </form>
+                            @endif
                         </div>
                     @endif
                 </div>
