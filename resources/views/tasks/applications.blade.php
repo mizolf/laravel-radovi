@@ -18,6 +18,24 @@
                 </div>
             @endif
 
+            @if (session('error'))
+                <div class="mb-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                    <span class="block sm:inline">{{ session('error') }}</span>
+                </div>
+            @endif
+
+            @php
+                $acceptedApplication = $applications->where('status', 'accepted')->first();
+            @endphp
+
+            @if($acceptedApplication)
+                <div class="mb-4 bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded relative" role="alert">
+                    <span class="block sm:inline">
+                        <strong>{{ __('tasks.student_selected') }}:</strong> {{ $acceptedApplication->user->name }}
+                    </span>
+                </div>
+            @endif
+
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h3 class="text-lg font-semibold mb-4">{{ __('tasks.applications_list') }}</h3>

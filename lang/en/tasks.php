@@ -56,4 +56,5 @@ return [
     'reject' => 'Reject',
     'set_pending' => 'Set Pending',
     'confirm_withdraw' => 'Are you sure you want to withdraw your application?',
+    'student_selected' => 'Student Selected',
 ];

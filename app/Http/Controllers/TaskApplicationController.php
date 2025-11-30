@@ -94,6 +94,25 @@ class TaskApplicationController extends Controller
             'status' => ['required', 'in:pending,accepted,rejected'],
         ]);
 
+        // If accepting a student, check if another student is already accepted
+        if ($validated['status'] === 'accepted') {
+            $acceptedApplication = $task->applications()
+                ->where('status', 'accepted')
+                ->where('id', '!=', $application->id)
+                ->first();
+
+            if ($acceptedApplication) {
+                return redirect()->back()
+                    ->with('error', 'Another student has already been accepted for this task. Please reject them first.');
+            }
+
+            // Automatically reject all other pending applications
+            $task->applications()
+                ->where('id', '!=', $application->id)
+                ->where('status', 'pending')
+                ->update(['status' => 'rejected']);
+        }
+
         $application->update(['status' => $validated['status']]);
 
         return redirect()->back()

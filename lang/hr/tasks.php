@@ -56,4 +56,5 @@ return [
     'reject' => 'Odbij',
     'set_pending' => 'Postavi na čekanje',
     'confirm_withdraw' => 'Jeste li sigurni da želite povući svoju prijavu?',
+    'student_selected' => 'Odabrani student',
 ];
